@@ -1,13 +1,28 @@
 const MAX_LENGTH = 200;
+const STORAGE_KEY = 'quicknotes-notes';
 
 const form = document.querySelector('#note-form');
 const noteInput = document.querySelector('#note-input');
 const categorySelect = document.querySelector('#note-category');
 const errorMessage = document.querySelector('#error-message');
+const searchInput = document.querySelector('#search-input');
 const notesList = document.querySelector('#notes-list');
 const noteCount = document.querySelector('#note-count');
 
-let notes = [];
+let notes = loadNotes();
+
+function loadNotes() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return Array.isArray(saved) ? saved : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveNotes() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+}
 
 function updateCount() {
   if (notes.length === 0) {
@@ -20,9 +35,21 @@ function updateCount() {
 }
 
 function render() {
+  const term = searchInput.value.trim().toLowerCase();
+  const visibleNotes = notes.filter((note) =>
+    note.text.toLowerCase().includes(term)
+  );
+
   notesList.textContent = '';
 
-  notes.forEach((note) => {
+  if (notes.length > 0 && visibleNotes.length === 0) {
+    const empty = document.createElement('li');
+    empty.className = 'no-results';
+    empty.textContent = 'No notes match your search.';
+    notesList.appendChild(empty);
+  }
+
+  visibleNotes.forEach((note) => {
     const li = document.createElement('li');
     li.className = `note category-${note.category.toLowerCase()}`;
 
@@ -56,6 +83,7 @@ function render() {
 
 function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
+  saveNotes();
   render();
 }
 
@@ -83,8 +111,11 @@ form.addEventListener('submit', (event) => {
     createdAt: new Date().toLocaleString(),
   });
 
+  saveNotes();
   noteInput.value = '';
   render();
 });
+
+searchInput.addEventListener('input', render);
 
 render();
