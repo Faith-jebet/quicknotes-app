@@ -154,6 +154,15 @@ button:hover {
   background: #dc2626;
 }
 
+#clear-all {
+  margin-bottom: 1rem;
+  background: #991b1b;
+}
+
+#clear-all:hover {
+  background: #7f1d1d;
+}
+
 .no-results {
   color: #6b7280;
   font-style: italic;
