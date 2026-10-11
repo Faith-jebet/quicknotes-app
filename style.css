@@ -1,0 +1,197 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #eef2f5;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+header {
+  background: #0f766e;
+  color: #ffffff;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 0.25rem 0 0;
+  opacity: 0.9;
+}
+
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Form */
+#note-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#note-form input {
+  flex: 1;
+}
+
+input,
+select {
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+#search-input {
+  width: 100%;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  font: inherit;
+  color: #ffffff;
+  background: #0f766e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #115e59;
+}
+
+#error-message {
+  color: #dc2626;
+  min-height: 1.5rem;
+  margin: 0.5rem 0 0;
+}
+
+/* Notes */
+#note-count {
+  color: #6b7280;
+}
+
+#notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-left: 6px solid #9ca3af;
+  border-radius: 8px;
+}
+
+.note-text {
+  margin: 0 0 0.5rem;
+  word-break: break-word;
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.note-category {
+  font-weight: 600;
+}
+
+.note-delete {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  background: #6b7280;
+}
+
+.note-delete:hover {
+  background: #dc2626;
+}
+
+.no-results {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Category styles */
+.category-personal {
+  border-left-color: #0d9488;
+}
+
+.category-personal .note-category {
+  color: #0d9488;
+}
+
+.category-work {
+  border-left-color: #991b1b;
+}
+
+.category-work .note-category {
+  color: #991b1b;
+}
+
+.category-study {
+  border-left-color: #2563eb;
+}
+
+.category-study .note-category {
+  color: #2563eb;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  #note-form {
+    flex-direction: column;
+  }
+
+  .note-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
